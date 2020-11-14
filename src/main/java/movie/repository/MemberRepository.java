@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import movie.beans.Member;
 @Repository
-public interface MemberRepository extends
-JpaRepository<Member, Long>{
+public interface MemberRepository extends JpaRepository<Member, Long>{
 
 }

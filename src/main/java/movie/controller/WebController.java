@@ -14,20 +14,20 @@ public class WebController {
 	@Autowired
 	MemberRepository repo;
 	
-	@GetMapping({ "/", "memberRegistration" })
-	public String registrationPage(Model model) {
+	@GetMapping({"/", "/memberRegistration"})
+	public String addNewMember(Model model) {
 		Member m = new Member();
 		model.addAttribute("newMember", m);
-		return "registration";
+	return "registration";
 	}
 	
 	@PostMapping("/memberRegistration")
 	public String addNewMember(@ModelAttribute Member m, Model model) {
-	repo.save(m);
-	return "home";
+		repo.save(m);
+		return "home";
 	}
 	
-	@GetMapping("/rentalHome")
+	@GetMapping("/homePage")
 	public String memberHomePage() {
 	return "home";
 	}
