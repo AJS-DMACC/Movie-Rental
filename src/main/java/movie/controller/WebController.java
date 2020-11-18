@@ -18,11 +18,20 @@ public class WebController {
 	MemberRepository repo;
 	RentalRepository rentRepo;
 	
-	@GetMapping({"/", "/memberRegistration"})
+	@GetMapping({ "/", "viewAll" })
+	public String viewAllMembers(Model model) {
+		if(repo.findAll().isEmpty()) {
+			return addNewMember(model);
+		}
+		model.addAttribute("members", repo.findAll());
+		return "results";
+	}
+	
+	@GetMapping("/memberRegistration")
 	public String addNewMember(Model model) {
 		Member m = new Member();
 		model.addAttribute("newMember", m);
-	return "registration";
+		return "registration";
 	}
 	
 	@PostMapping("/memberRegistration")
@@ -46,7 +55,7 @@ public class WebController {
 		return "confirmRental";
 	}
 	
-	@GetMapping("/homePage")
+	@GetMapping("homePage")
 	public String memberHomePage() {
 	return "home";
 	}
