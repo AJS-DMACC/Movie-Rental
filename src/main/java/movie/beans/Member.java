@@ -24,8 +24,8 @@ public class Member {
 	private long id;
 	private String firstName;
 	private String lastName;
-	private int licenseNo;
+	private String licenseNo;
 	private String licenseSt;
-	private int creditCard;
+	private long creditCard;
 	private String suspension;
 }
