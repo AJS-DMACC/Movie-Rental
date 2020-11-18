@@ -14,7 +14,17 @@ public class WebController {
 	@Autowired
 	MemberRepository repo;
 	
-	@GetMapping({ "/", "memberRegistration" })
+	
+	@GetMapping("/viewAll")
+	public String viewAllMoviesAndMembers(Model model) {
+		if(repo.findAll().isEmpty()) {
+			return registrationPage(model);
+		}
+		model.addAttribute("members", repo.findAll());
+		return "results";
+	}
+	
+	@GetMapping("memberRegistration")
 	public String registrationPage(Model model) {
 		Member m = new Member();
 		model.addAttribute("newMember", m);
@@ -27,7 +37,7 @@ public class WebController {
 	return "home";
 	}
 	
-	@GetMapping("/rentalHome")
+	@GetMapping({"/", "rentalHome"})
 	public String memberHomePage() {
 	return "home";
 	}
