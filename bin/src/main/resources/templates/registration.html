@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Member Registration</title>
+</head>
+<body>
+<h2>Fill up the member form</h2>
+<form th:object="${newMember}" th:action="@{/memberRegistration}"
+method='POST'>
+<label for="fname">First name:</label><br>
+<input name="firstName" size="20" ><br /><br />
+
+<label for="fname">Last Name:</label><br>
+<input name="lastName" size="20" ><br /><br />
+
+<label for="fname">License No:</label><br>
+<input name="licenseNo" size="20" ><br /><br />
+
+<label for="fname">License St:</label><br>
+<input name="licenseSt" size="20" ><br /><br />
+
+<label for="fname">Credit Card:</label><br>
+<input name="creditCard" size="20" ><br /><br />
+
+<label for="fname">Suspension:</label><br>
+<input name="suspension" size="20" ><br /><br />
+
+<input name="submit" type="submit" value="submit" />
+</form>
+</body>
+</html>
