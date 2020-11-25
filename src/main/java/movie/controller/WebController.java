@@ -20,7 +20,7 @@ public class WebController {
 	MemberRepository repo;
 	RentalRepository rentRepo;
 	
-	@GetMapping("viewAll")
+	@GetMapping("/viewAll")
 	public String viewAllMembers(Model model) {
 		if(repo.findAll().isEmpty()) {
 			return addNewMember(model);
@@ -58,8 +58,18 @@ public class WebController {
 	}
 	
 	@GetMapping({ "/", "home" })
-	public String memberHomePage() {
+	public String homePage() {
 	return "home";
+	}
+	
+	@GetMapping( "/memberView")//eventually add id to url once login is completed
+	public String memberHomePage() {
+		return "memberHome";
+	}
+	
+	@GetMapping( "/employeeView")//eventually add id to url once login is completed
+	public String employeeHomePage() {
+		return "employeeHome";
 	}
 	
 	@GetMapping("/edit/{id}")
