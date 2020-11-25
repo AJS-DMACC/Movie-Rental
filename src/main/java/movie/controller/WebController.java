@@ -20,7 +20,7 @@ public class WebController {
 	MemberRepository repo;
 	RentalRepository rentRepo;
 	
-	@GetMapping({ "/", "viewAll" })
+	@GetMapping("viewAll")
 	public String viewAllMembers(Model model) {
 		if(repo.findAll().isEmpty()) {
 			return addNewMember(model);
@@ -57,7 +57,7 @@ public class WebController {
 		return "confirmRental";
 	}
 	
-	@GetMapping("homePage")
+	@GetMapping({ "/", "home" })
 	public String memberHomePage() {
 	return "home";
 	}
