@@ -16,9 +16,15 @@ import movie.repository.RentalRepository;
 
 @Controller
 public class WebController {
+	
+	
 	@Autowired
 	MemberRepository repo;
+	
+	
+	@Autowired
 	RentalRepository rentRepo;
+	
 	
 	@GetMapping("/viewAll")
 	public String viewAllMembers(Model model) {
@@ -42,20 +48,22 @@ public class WebController {
 		return "home";
 	}
 	
+	// Rental ============================================================================
 	
 	@GetMapping( "/rentalRegistration")
 	public String addNewRental(Model model) {
 		Rental r = new Rental();
 		model.addAttribute("newRental", r);
-		return "addRental";
+		return "rental";
 	}
 	
 	@PostMapping("/rentalRegistration")
 	public String addNewRental(@ModelAttribute Rental r, Model model) {
 		rentRepo.save(r);
-		model.addAttribute("rental", r);
 		return "confirmRental";
 	}
+	// End Rental =========================================================================
+	
 	
 	@GetMapping({ "/", "home" })
 	public String homePage() {
