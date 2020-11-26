@@ -1,5 +1,7 @@
 package movie.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -61,13 +63,38 @@ public class WebController {
 	public String homePage() {
 	return "home";
 	}
+
+	@GetMapping( "/memberLogin")
+	public String memberLogin(Model model) {
+		Member m = new Member();
+		model.addAttribute("member", m);
+		return "memberLogin";
+	}
 	
-	@GetMapping( "/memberView")//eventually add id to url once login is completed
+	@PostMapping("/memberLogin")
+	public String memberLogin(@ModelAttribute Member m, Model model) {
+		List<Member> NameMatches = repo.findByFirstNameAndLastName(m.getFirstName(), m.getLastName());
+		System.out.println("NameMathces lenght: "+ NameMatches.size());
+		for(Member mem : NameMatches) {
+			if(mem.getCreditCard() == m.getCreditCard()) {//if username (first and last name) matches password (credit card)
+				return "memberHome";
+			}
+		}
+		model.addAttribute("failMessage", "Incorrect Login");
+		return "memberLogin";
+	}
+	
+	@GetMapping( "/employeeLogin")
+	public String employeeLogin() {
+		return "employeeLogin";
+	}
+	
+	@GetMapping( "/memberView")
 	public String memberHomePage() {
 		return "memberHome";
 	}
 	
-	@GetMapping( "/employeeView")//eventually add id to url once login is completed
+	@GetMapping( "/employeeView")
 	public String employeeHomePage() {
 		return "employeeHome";
 	}
