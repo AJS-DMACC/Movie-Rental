@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Employee Login Page</title>
+<meta charset="UTF-8">
+<title>Employee Login</title>
 </head>
 <body>
+<h2  style="color:red;" th:text="${failMessage}"></h2>
+<form th:object="${employee}"  method='POST'>
+<label for="fname">User name:</label><br>
+<input name="userName" size="20" th:field="*{userName}"><br /><br />
 
+<label for="fname">Password:</label><br>
+<input name="password" size="20" th:field="*{password}"><br /><br />
+
+<input name="submit" type="submit" value="submit" />
+</form>
 </body>
 </html>

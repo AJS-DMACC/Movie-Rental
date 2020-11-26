@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import movie.beans.Employee;
 import movie.beans.Member;
 import movie.beans.Rental;
+import movie.repository.EmployeeRepository;
 import movie.repository.MemberRepository;
 import movie.repository.RentalRepository;
 
@@ -21,6 +23,8 @@ public class WebController {
 	@Autowired
 	MemberRepository repo;
 	RentalRepository rentRepo;
+	@Autowired
+	EmployeeRepository empRepo;
 	
 	@GetMapping("/viewAll")
 	public String viewAllMembers(Model model) {
@@ -30,6 +34,20 @@ public class WebController {
 		model.addAttribute("members", repo.findAll());
 		return "results";
 	}
+
+	@GetMapping("/employeeRegistration")
+	public String addNewEmployee(Model model) {
+		Employee e = new Employee();
+		model.addAttribute("newEmployee", e);
+		return "employeeRegistration";
+	}
+	
+	@PostMapping("/employeeRegistration")
+	public String addNewEmployee(@ModelAttribute Employee e, Model model) {
+		System.out.println(e.toString() );
+		empRepo.save(e);
+		return "home";
+	}	
 	
 	@GetMapping("/memberRegistration")
 	public String addNewMember(Model model) {
@@ -85,7 +103,23 @@ public class WebController {
 	}
 	
 	@GetMapping( "/employeeLogin")
-	public String employeeLogin() {
+	public String employeeLogin(Model model) {
+		Employee e = new Employee();
+		model.addAttribute("employee", e);
+		return "employeeLogin";
+	}
+	
+	@PostMapping("/employeeLogin")
+	public String employeeLogin(@ModelAttribute Employee e, Model model) {
+		List<Employee> userNameMatches = empRepo.findByUserName(e.getUserName());
+		System.out.println("usernames matches lenght: "+ userNameMatches.size());
+		for(Employee emp : userNameMatches) {
+			System.out.println("emp: " + emp.toString() + ", e: " + e.toString());
+			if(emp.getPassword().equalsIgnoreCase(e.getPassword())) {//if username matches password 			
+				return "employeeHome";
+			}
+		}
+		model.addAttribute("failMessage", "Incorrect Employee Credentials");
 		return "employeeLogin";
 	}
 	
