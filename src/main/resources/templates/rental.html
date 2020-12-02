@@ -3,12 +3,23 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Rent a Movie</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
+<div class="container">
+<h1 class="text-center">Rent a Movie</h1>
 <form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>	
-		<label for="memberID">Member:</label> 
-		<input name="memberID" size="4"><br>
-		
+		<div class="row justify-content-center">
+			<div class="col-md-2">
+				<label for="id">Member ID:</label> 
+			</div>
+			<div class="col-md-10">
+				<input name="member.id" size="4" required><br>
+			</div>
+		</div>
 		<!--   <label for="movieID">Movie: </label>
 			<select name="allMovies">
 			<c:forEach items="${requestScope.allMovies}" var="currentMovie">
@@ -16,26 +27,45 @@
 			</c:forEach>
 			</select>
 			</div>-->
-			
-		<h2>Payment Method: </h2>
+		<div class="row">
+			<div class="col-2">
+				<label for="movieID">Movie:</label> 
+			</div>
+			<div class="col-10">
+			<input name="movieID" size="4" required ><br>
+			</div>
+		</div>
+		
+		
+		<p>Payment Method: </p>
+		
+		<div class="ml-5">
 		<input type="radio" name="paymentMethod" id="account" value="1" >
 		<label for="account">Account</label>
 		
-		<input type="radio" name="paymentMethod" id="creditCard" value="2">
+		<br>
+		<input type="radio" name="paymentMethod" id="creditCard" value="2" checked>
 		<label for="creditCard">Credit Card</label>
 		
+		<br>
 		<input type="radio" name="paymentMethod" id="check" value="3" >
 		<label for="check">Check</label>
-		
+	
+		<br>
 		<input type="radio" name="paymentMethod" id="cash" value="4" >
 		<label for="cash">Cash</label>
 		
+		<br>		
 		<input type="radio" name="paymentMethod" id="debit" value="5" >
 		<label for="debit">Debit Card</label>
+		</div>
+		<br>		
 		
-		
-		
-		<input name="submit" type="submit" value="submit"/>
+		<button type="submit" class="btn btn-dark">Rent</button>
 	</form>
+	</div>
+	
+	
+	
 </body>
 </html>
