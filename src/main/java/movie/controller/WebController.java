@@ -1,5 +1,7 @@
 package movie.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import movie.beans.Employee;
 import movie.beans.Member;
 import movie.beans.Rental;
+import movie.repository.EmployeeRepository;
 import movie.repository.MemberRepository;
 import movie.repository.RentalRepository;
 
@@ -24,6 +28,8 @@ public class WebController {
 	
 	@Autowired
 	RentalRepository rentRepo;
+	@Autowired
+	EmployeeRepository empRepo;
 	
 	
 	@GetMapping("/viewAll")
@@ -34,6 +40,20 @@ public class WebController {
 		model.addAttribute("members", repo.findAll());
 		return "results";
 	}
+
+	@GetMapping("/employeeRegistration")
+	public String addNewEmployee(Model model) {
+		Employee e = new Employee();
+		model.addAttribute("newEmployee", e);
+		return "employeeRegistration";
+	}
+	
+	@PostMapping("/employeeRegistration")
+	public String addNewEmployee(@ModelAttribute Employee e, Model model) {
+		System.out.println(e.toString() );
+		empRepo.save(e);
+		return "home";
+	}	
 	
 	@GetMapping("/memberRegistration")
 	public String addNewMember(Model model) {
@@ -69,13 +89,54 @@ public class WebController {
 	public String homePage() {
 	return "home";
 	}
+
+	@GetMapping( "/memberLogin")
+	public String memberLogin(Model model) {
+		Member m = new Member();
+		model.addAttribute("member", m);
+		return "memberLogin";
+	}
 	
-	@GetMapping( "/memberView")//eventually add id to url once login is completed
+	@PostMapping("/memberLogin")
+	public String memberLogin(@ModelAttribute Member m, Model model) {
+		List<Member> NameMatches = repo.findByFirstNameAndLastName(m.getFirstName(), m.getLastName());
+		System.out.println("NameMathces lenght: "+ NameMatches.size());
+		for(Member mem : NameMatches) {
+			if(mem.getCreditCard() == m.getCreditCard()) {//if username (first and last name) matches password (credit card)
+				return "memberHome";
+			}
+		}
+		model.addAttribute("failMessage", "Incorrect Login");
+		return "memberLogin";
+	}
+	
+	@GetMapping( "/employeeLogin")
+	public String employeeLogin(Model model) {
+		Employee e = new Employee();
+		model.addAttribute("employee", e);
+		return "employeeLogin";
+	}
+	
+	@PostMapping("/employeeLogin")
+	public String employeeLogin(@ModelAttribute Employee e, Model model) {
+		List<Employee> userNameMatches = empRepo.findByUserName(e.getUserName());
+		System.out.println("usernames matches lenght: "+ userNameMatches.size());
+		for(Employee emp : userNameMatches) {
+			System.out.println("emp: " + emp.toString() + ", e: " + e.toString());
+			if(emp.getPassword().equalsIgnoreCase(e.getPassword())) {//if username matches password 			
+				return "employeeHome";
+			}
+		}
+		model.addAttribute("failMessage", "Incorrect Employee Credentials");
+		return "employeeLogin";
+	}
+	
+	@GetMapping( "/memberView")
 	public String memberHomePage() {
 		return "memberHome";
 	}
 	
-	@GetMapping( "/employeeView")//eventually add id to url once login is completed
+	@GetMapping( "/employeeView")
 	public String employeeHomePage() {
 		return "employeeHome";
 	}

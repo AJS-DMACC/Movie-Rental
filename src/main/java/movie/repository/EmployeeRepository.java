@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import movie.beans.Member;
+import movie.beans.Employee;
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long>{
-	List<Member> findByFirstNameAndLastName(String firstName, String LastName);
+public interface EmployeeRepository extends JpaRepository<Employee, Long>{	
+	List<Employee> findByUserName(String userName);
 }
+
