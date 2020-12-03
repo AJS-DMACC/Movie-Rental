@@ -3,65 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Member Registration</title>
-<script>
-      function validate() {
-      
-         if( document.myForm.firstName.value == "" ) {
-            alert( "Please provide first name!" );
-            document.myForm.firstName.focus() ;
-            return false;
-         }
-         if( document.myForm.lastName.value == "" ) {
-             alert( "Please provide last name!" );
-             document.myForm.lastName.focus() ;
-             return false;
-          }
-         if( document.myForm.licenseNo.value == "" ) {
-            alert( "Please provide licenseNo!" );
-            document.myForm.licenseNo.focus() ;
-            return false;
-         }
-         if( document.myForm.licenseSt.value == "" ) {
-             alert( "Please provide licenseSt!" );
-             document.myForm.licenseSt.focus() ;
-             return false;
-          }
-         if( document.myForm.creditCard.value == "" || isNaN( document.myForm.creditCard.value ) ||
-            document.myForm.creditCard.value.length != 12) {
-            
-            alert( "Please provide a valid card number #### #### ####." );
-            document.myForm.creditCard.focus() ;
-            return false;
-         }
-         if( document.myForm.suspension.value == "" ) {
-             alert( "Please provide Suspension!" );
-             document.myForm.suspension.focus() ;
-             return false;
-          }
-         return( true );
-      }
-</script>
 </head>
 <body>
 <h2>Fill up the member form</h2>
-<form th:object="${newMember}" th:action="@{/update/{id}(id=${newMember.id})}" name = "myForm" onsubmit = "return validate();" method='POST'>
+<form th:object="${newMember}" th:action="@{/memberRegistration}"
+method='POST'>
 <label for="fname">First name:</label><br>
-<input name="firstName" size="20" th:field="*{firstName}"><br /><br />
+<input name="firstName" size="20" ><br /><br />
 
 <label for="fname">Last Name:</label><br>
-<input name="lastName" size="20" th:field="*{lastName}"><br /><br />
+<input name="lastName" size="20" ><br /><br />
 
 <label for="fname">License No:</label><br>
-<input name="licenseNo" size="20" th:field="*{licenseNo}"><br /><br />
+<input name="licenseNo" size="20" ><br /><br />
 
 <label for="fname">License St:</label><br>
-<input name="licenseSt" size="20" th:field="*{licenseSt}"><br /><br />
+<input name="licenseSt" size="20" ><br /><br />
 
 <label for="fname">Credit Card:</label><br>
-<input name="creditCard" size="20" th:field="*{creditCard}"><br /><br />
+<input name="creditCard" size="20" ><br /><br />
 
 <label for="fname">Suspension:</label><br>
-<input name="suspension" size="20" th:field="*{suspension}"><br /><br />
+<input name="suspension" size="20" ><br /><br />
 
 <input name="submit" type="submit" value="submit" />
 </form>

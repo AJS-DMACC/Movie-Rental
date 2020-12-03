@@ -1,7 +1,7 @@
 package movie.controller;
 
 import movie.beans.Member;
-import movie.beans.Movie;
+import movie.beans.Employee;
 
 public class BeanConfiguration {
 	
@@ -9,10 +9,9 @@ public class BeanConfiguration {
 		Member bean = new Member();
 		return bean;
 		}
-	
-	public Movie movie() {
-		Movie bean = new Movie();
+
+	public Employee employee() {
+		Employee bean = new Employee();
 		return bean;
 		}
-
 }
