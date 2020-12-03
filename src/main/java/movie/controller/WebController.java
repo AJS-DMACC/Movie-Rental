@@ -20,7 +20,9 @@ import movie.repository.RentalRepository;
 public class WebController {
 	@Autowired
 	MemberRepository memberRepo;
+	@Autowired
 	RentalRepository rentRepo;
+	@Autowired
 	MovieRepository movieRepo;
 
 	@GetMapping({ "/", "home" })
@@ -86,7 +88,7 @@ public class WebController {
 	}
 
 	// viewAllMovie
-	@GetMapping({"/","/viewAllMovie"})
+	@GetMapping("/viewAllMovie")
 	public String viewAllMovies(Model model) {
 		if (movieRepo.findAll().isEmpty()) {
 			return addNewMovie(model);
