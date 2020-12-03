@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Rental Confirmation</title>
+</head>
+<body>
+<h1>Thank You For Renting a Movie With Us</h1>
+<h4>Rental Details:</h4>
+<form  th:object="${rental}">
+<label for="fname">Rental ID:</label><br>
+<input name="id" size="20" ><br /><br />
+
+<label for="fname">Member First Name:</label><br>
+<input name="member.firstName" size="20" ><br /><br />
+
+<label for="fname">Movie Name:</label><br>
+<input name="movie.name" size="20" ><br /><br />
+
+<label for="fname">Rental Date:</label><br>
+<input name="date" size="20" ><br /><br />
+
+<label for="fname">Payment Method</label><br>
+<input name="member.creditCard" size="20" ><br /><br />
+
+</form>
+<a href="home"></a>
+/body>
+</html>

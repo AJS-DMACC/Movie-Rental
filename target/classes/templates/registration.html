@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Member Registration</title>
+<style>
+form {
+  text-align: center;
+}
+body {
+  background-color: skyblue;
+}
+
+h1 {
+  color: Black;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+</style>
 <script>
       function validate() {
       
@@ -43,25 +61,33 @@
 </script>
 </head>
 <body>
-<h2>Fill up the member form</h2>
-<form th:object="${newMember}" th:action="@{/update/{id}(id=${newMember.id})}" name = "myForm" onsubmit = "return validate();" method='POST'>
+<h1>Fill up the member form</h1>
+<form th:object="${newMember}" 
+th:action= "@{/updateMember/{id}(id=${newMember.id})}" name = "myForm" onsubmit = "return validate();" method='POST'>
+
 <label for="fname">First name:</label><br>
-<input name="firstName" size="20" th:field="*{firstName}"><br /><br />
+<input name="firstName" size="20" 
+th:field="*{firstName}"><br /><br />
 
 <label for="fname">Last Name:</label><br>
-<input name="lastName" size="20" th:field="*{lastName}"><br /><br />
+<input name="lastName" size="20" 
+th:field="*{lastName}"><br /><br />
 
 <label for="fname">License No:</label><br>
-<input name="licenseNo" size="20" th:field="*{licenseNo}"><br /><br />
+<input name="licenseNo" size="20" 
+th:field="*{licenseNo}"><br /><br />
 
 <label for="fname">License St:</label><br>
-<input name="licenseSt" size="20" th:field="*{licenseSt}"><br /><br />
+<input name="licenseSt" size="20" 
+th:field="*{licenseSt}"><br /><br />
 
 <label for="fname">Credit Card:</label><br>
-<input name="creditCard" size="20" th:field="*{creditCard}"><br /><br />
+<input name="creditCard" size="20" 
+th:field="*{creditCard}"><br /><br />
 
 <label for="fname">Suspension:</label><br>
-<input name="suspension" size="20" th:field="*{suspension}"><br /><br />
+<input name="suspension" size="20" 
+th:field="*{suspension}"><br /><br />
 
 <input name="submit" type="submit" value="submit" />
 </form>
