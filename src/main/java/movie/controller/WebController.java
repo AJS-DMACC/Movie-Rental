@@ -144,21 +144,42 @@ public class WebController {
 		return viewAllMovies(model);
 	}
 
+//================================================================
+// RENTAL
+//================================================================
+	
 	@GetMapping("/rentalRegistration")
 	public String addNewRental(Model model) {
 		Rental r = new Rental();
 		model.addAttribute("newRental", r);
-		return "addRental";
+		
+		List<Movie> movies = movieRepo.findAll();
+		model.addAttribute("movies", movies);
+		return "rental";
 	}
 
 	@PostMapping("/rentalRegistration")
 	public String addNewRental(@ModelAttribute Rental r, Model model) {
+		
+		try {
 		rentRepo.save(r);
+		
+		}catch(Exception e) {
+			model.addAttribute("rentalFail", "You must be a member to rent a movie!");
+			Rental redo = new Rental();
+			model.addAttribute("newRental", redo);
+			
+			List<Movie> movies = movieRepo.findAll();
+			model.addAttribute("movies", movies);
+			return "rental";
+		}
 		model.addAttribute("rental", r);
 		return "confirmRental";
+		
 	}
 	
-
+// END RENTAL
+	
 	@GetMapping( "/memberLogin")
 	public String memberLogin(Model model) {
 		Member m = new Member();

@@ -63,7 +63,7 @@ p {
 <body>
 <h1>Fill up the member form</h1>
 <form th:object="${newMember}" 
-th:action= "@{/updateMember/{id}(id=${newMember.id})}" name = "myForm" onsubmit = "return validate();" method='POST'>
+th:action= "@{/updateMember/{id}(id=${newMember.memberID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
 <label for="fname">First name:</label><br>
 <input name="firstName" size="20" 

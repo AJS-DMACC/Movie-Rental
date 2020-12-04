@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long memberID;
 	private String firstName;
 	private String lastName;
 	private String licenseNo;

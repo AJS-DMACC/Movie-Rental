@@ -30,11 +30,12 @@ public class Rental {
 	private long rentalID;
 	
 	@ManyToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="memberID")
 	private Member member;
 	
-	@Column(name="movieID")
-	private long movieID;
+	@ManyToOne
+	@JoinColumn(name="movieID")
+	private Movie movie;
 	
 	@Column(name="checkoutDateTime")
 	@CreationTimestamp
@@ -47,17 +48,17 @@ public class Rental {
 	
 	
 
-	public Rental(Member member, long movieID, int paymentMethod) {
+	public Rental(Member member, Movie movie, int paymentMethod) {
 		super();
 		this.member = member;
-		this.movieID = movieID;
+		this.movie = movie;
 		this.paymentMethod = paymentMethod;
 	}
 	
-	public Rental(Member member, long movieID, LocalDateTime checkoutDateTime, LocalDateTime checkinDateTime, int paymentMethod) {
+	public Rental(Member member, Movie movie, LocalDateTime checkoutDateTime, LocalDateTime checkinDateTime, int paymentMethod) {
 		super();
 		this.member = member;
-		this.movieID = movieID;
+		this.movie = movie;
 		this.checkoutDateTime = checkoutDateTime;
 		this.checkinDateTime = checkinDateTime;
 		this.paymentMethod = paymentMethod;
@@ -67,7 +68,6 @@ public class Rental {
 	@Override
 	public String toString() {
 		return "Rental [rentalID = " + rentalID  +   
-				", movieID=" + movieID + 
 				", checkoutDate=" + checkoutDateTime + 
 				", checkinDate" + checkinDateTime + 
 				",paymentMethod=" + paymentMethod + 
