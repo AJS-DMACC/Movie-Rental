@@ -42,8 +42,8 @@ public class Rental {
 	private LocalDateTime checkoutDateTime = LocalDateTime.now();
 	
 	@Column(name="checkinDateTime")
-	@CreationTimestamp
-	private LocalDateTime checkinDateTime = LocalDateTime.now();
+	//@CreationTimestamp
+	private LocalDateTime checkinDateTime;
 	private int paymentMethod;
 	
 	
@@ -55,6 +55,15 @@ public class Rental {
 		this.paymentMethod = paymentMethod;
 	}
 	
+	public Rental(Member member, Movie movie, LocalDateTime checkoutDateTime, int paymentMethod) {
+		super();
+		this.member = member;
+		this.movie = movie;
+		this.checkoutDateTime = checkoutDateTime;
+		this.paymentMethod = paymentMethod;
+	}
+	
+	
 	public Rental(Member member, Movie movie, LocalDateTime checkoutDateTime, LocalDateTime checkinDateTime, int paymentMethod) {
 		super();
 		this.member = member;
@@ -64,12 +73,14 @@ public class Rental {
 		this.paymentMethod = paymentMethod;
 	}
 	
-
+	
 	@Override
 	public String toString() {
 		return "Rental [rentalID = " + rentalID  +   
 				", checkoutDate=" + checkoutDateTime + 
 				", checkinDate" + checkinDateTime + 
+				", member" + member +
+				", movie " + movie + 
 				",paymentMethod=" + paymentMethod + 
 				",paymentMethod=" + paymentMethod + 
 
