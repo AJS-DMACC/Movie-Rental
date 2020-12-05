@@ -52,7 +52,7 @@ p {
 <h1>Add or Update Movie on the list</h1>
 <a href="../viewAllMovie">Go Movie List</a>
 <form th:object="${newMovie}" 
-th:action= "@{/updateMovie/{id}(id=${newMovie.id})}" name = "myForm" onsubmit = "return validate();" method='POST'>
+th:action= "@{/updateMovie/{id}(id=${newMovie.movieID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
 <label for="fname">Movie Title:</label><br>
 <input name="title" size="20" 

@@ -60,8 +60,8 @@ tr:nth-child(even) {
 <td th:text="${currentMember.licenseSt}" />
 <td th:text="${currentMember.creditCard}" />
 <td th:text="${currentMember.suspension}" />
-<td><a th:href="@{/editMember/{id}(id=${currentMember.id})}">Edit</a></td>
-<td><a th:href="@{/deleteMember/{id}(id=${currentMember.id})}">Delete</a></td>
+<td><a th:href="@{/editMember/{id}(id=${currentMember.memberID})}">Edit</a></td>
+<td><a th:href="@{/deleteMember/{id}(id=${currentMember.memberID})}">Delete</a></td>
 </tr>
 </table>
 </form>

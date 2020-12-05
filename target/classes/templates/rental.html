@@ -11,31 +11,24 @@
 <body>
 <div class="container">
 <h1 class="text-center">Rent a Movie</h1>
-<form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>	
+<form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>
+		<h2  style="color:red;" th:text="${rentalFail}"></h2>
+	
 		<div class="row justify-content-center">
 			<div class="col-md-2">
 				<label for="id">Member ID:</label> 
 			</div>
 			<div class="col-md-10">
-				<input name="member.id" size="4" required><br>
-			</div>
-		</div>
-		<!--   <label for="movieID">Movie: </label>
-			<select name="allMovies">
-			<c:forEach items="${requestScope.allMovies}" var="currentMovie">
-   			<option value = "${currentMovie.id}">${currentMovie.movieName} | ${currentMovie.quantity}</option>
-			</c:forEach>
-			</select>
-			</div>-->
-		<div class="row">
-			<div class="col-2">
-				<label for="movieID">Movie:</label> 
-			</div>
-			<div class="col-10">
-			<input name="movieID" size="4" required ><br>
+				<input name="member.memberID" size="4" required><br>
 			</div>
 		</div>
 		
+		<div>
+			<select name="Movie">
+			<option value="">Select a Movie</option>
+			<option th:each="movie : ${movies}" th:value="${movie.movieID}" th:text="${movie.title}"></option>
+			</select>
+		</div>
 		
 		<p>Payment Method: </p>
 		

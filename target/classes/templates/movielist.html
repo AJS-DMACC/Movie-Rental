@@ -56,8 +56,8 @@ tr:nth-child(even) {
 <td th:text="${currentMovie.categoryId}" />
 <td th:text="${currentMovie.value}" />
 <td th:text="${currentMovie.quantity}" />
-<td><a th:href="@{/editMovie/{id}(id=${currentMovie.id})}">Edit</a></td>
-<td><a th:href="@{/deleteMovie/{id}(id=${currentMovie.id})}">Delete</a></td>
+<td><a th:href="@{/editMovie/{id}(id=${currentMovie.movieID})}">Edit</a></td>
+<td><a th:href="@{/deleteMovie/{id}(id=${currentMovie.movieID})}">Delete</a></td>
 </tr>
 </table>
 </form>
