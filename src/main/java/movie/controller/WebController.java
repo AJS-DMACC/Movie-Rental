@@ -1,6 +1,10 @@
 package movie.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -60,8 +64,10 @@ public class WebController {
 	}
 
 	@PostMapping("/memberRegistration")
-	public String addNewMembers(@ModelAttribute Member m, Model model) {
+	public String addNewMembers(@ModelAttribute Member m, Model model, HttpSession session) {
 		memberRepo.save(m);
+		long memID = m.getMemberID();
+		session.setAttribute("memID", memID);
 		return viewAllMembers(model);
 	}
 
@@ -149,8 +155,10 @@ public class WebController {
 //================================================================
 	
 	@GetMapping("/rentalRegistration")
-	public String addNewRental(Model model) {
+	public String addNewRental(Model model, HttpSession session) {
 		Rental r = new Rental();
+		Member mem = (Member) session.getAttribute("member");
+		r.setMember(mem);
 		model.addAttribute("newRental", r);
 		
 		List<Movie> movies = movieRepo.findAll();
@@ -159,7 +167,7 @@ public class WebController {
 	}
 
 	@PostMapping("/rentalRegistration")
-	public String addNewRental(@ModelAttribute Rental r, Model model) {
+	public String addNewRental(@ModelAttribute Rental r, Model model, HttpSession session) {
 		
 		try {
 		rentRepo.save(r);
@@ -174,10 +182,37 @@ public class WebController {
 			return "rental";
 		}
 		model.addAttribute("rental", r);
-		return "confirmRental";
+		return memberRentals(model, session);
 		
 	}
 	
+	// viewAllRental
+		@GetMapping("/memberRentals")
+		public String memberRentals(Model model, HttpSession session) {
+//			if (rentRepo.findAll().isEmpty()) {
+//				return addNewRental(model);
+//			}
+			Member m = (Member)session.getAttribute("member");
+			long memID = m.getMemberID();
+			model.addAttribute("rentals", rentRepo.findMemberRentals(memID));
+			return "memberRentals";
+		}
+		
+		
+		@GetMapping("/checkIn/{id}")
+		public String checkInMovie(@PathVariable("id") long id, Model model, HttpSession session) {
+			Rental r = rentRepo.findById(id).orElse(null);
+			model.addAttribute("newRental", r);
+			return memberRentals(model, session);
+		}
+	
+		@GetMapping("/update/{id}")
+		public String updateRental(@PathVariable("id") long id, Model model, HttpSession session) {
+		Rental r = rentRepo.findById(id).orElse(null);
+		r.setCheckinDateTime(LocalDateTime.now());
+		rentRepo.save(r);
+		return memberRentals(model, session);
+		}
 // END RENTAL
 	
 	@GetMapping( "/memberLogin")
@@ -188,11 +223,15 @@ public class WebController {
 	}
 
 	@PostMapping("/memberLogin")
-	public String memberLogin(@ModelAttribute Member m, Model model) {
+	public String memberLogin(@ModelAttribute Member m, Model model, HttpSession session) {
 		List<Member> NameMatches = memberRepo.findByFirstNameAndLastName(m.getFirstName(), m.getLastName());
 		System.out.println("NameMathces lenght: "+ NameMatches.size());
 		for(Member mem : NameMatches) {
 			if(mem.getCreditCard() == m.getCreditCard()) {//if username (first and last name) matches password (credit card)
+				
+				session.setAttribute("member", mem);
+				System.out.println("Session Attribute Set to: " + session.getAttribute("member"));
+
 				return "memberHome";
 			}
 		}

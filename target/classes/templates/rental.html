@@ -9,20 +9,12 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container justify-content-center">
 <h1 class="text-center">Rent a Movie</h1>
 <form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>
 		<h2  style="color:red;" th:text="${rentalFail}"></h2>
 	
-		<div class="row justify-content-center">
-			<div class="col-md-2">
-				<label for="id">Member ID:</label> 
-			</div>
-			<div class="col-md-10">
-				<input name="member.memberID" size="4" required><br>
-			</div>
-		</div>
-		
+		Member: <input name="member.memberID" th:field="*{member.memberID}" hidden><br />
 		<div>
 			<select name="Movie">
 			<option value="">Select a Movie</option>
