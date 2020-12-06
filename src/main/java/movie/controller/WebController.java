@@ -113,6 +113,15 @@ public class WebController {
 		return "movielist";
 	}
 
+	@GetMapping("/viewAllMovies")
+	public String viewAllMovie(Model model) {
+		if (movieRepo.findAll().isEmpty()) {
+			return addNewMovie(model);
+		}
+		model.addAttribute("movies", movieRepo.findAll());
+		return "membersMovieList";
+	}
+	
 	// Adding movie
 
 	@GetMapping("/addMovie")

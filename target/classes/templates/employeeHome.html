@@ -3,14 +3,59 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Member Home Page</title>
+<style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  background-color: #34eb86;
+}
+
+h1 {
+  color: 33ff33;
+  text-align: center;
+}
+
+h2 {
+  color: 33ff33;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+.logout{
+text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
 <h1>Remember valued employee: Service is our #1 priority!</h1>
-
-<a href="../viewAllMovie">View All Movies</a>
-<a href="../viewAllMember">View All Members</a>
-<a href="../addMovie">Add A Movie</a>
-<a href="">Edit/Delete A Movie</a>
+<a href="../home">Logout</a>
+<table border=1, class="center">
+<tr>
+<td><a href="../viewAllMovie">View All Movies</a></td>
+<td><a href="../viewAllMember">View All Members</a></td>
+<td><a href="../addMovie">Add A Movie</a></td>
+<td><a href="../viewAllMovie">Edit/Delete A Movie</a></td>
+</tr></table>
 <hr>
 <a href="">Delete Employee Account</a>
 </body>

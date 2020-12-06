@@ -3,17 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <title>Employee Login</title>
+<style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+form {
+  text-align: center;
+}
+body {
+  background-color: #34d9eb;
+}
+
+h1 {
+  color: 33ff33;
+  text-align: center;
+}
+
+h2 {
+  color: 33ff33;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+.btn {
+background-color: #008CBA;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
+<h1>Enter Employee Login </h1>
+<a href="home">Go Home</a>
 <h2  style="color:red;" th:text="${failMessage}"></h2>
 <form th:object="${employee}"  method='POST'>
-<label for="fname">User name:</label><br>
+<label for="fname">User Name:</label><br>
 <input name="userName" size="20" th:field="*{userName}"><br /><br />
 
 <label for="fname">Password:</label><br>
 <input name="password" size="20" th:field="*{password}"><br /><br />
 
-<input name="submit" type="submit" value="submit" />
+<input name="submit" type="submit" value="submit" class="btn" />
 </form>
 </body>
 </html>

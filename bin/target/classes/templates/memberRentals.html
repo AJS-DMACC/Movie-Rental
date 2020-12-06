@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Your Rentals</title>
+<style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h1>Your Rentals</h1>
+<form  method=POST>
+<table class="center">
+<tr>
+    <th>Rental ID</th>
+    <th>Member ID</th>
+    <th>Member</th>
+    <th>Movie</th>
+     <th>Checkout</th>
+    <th>Check-in</th>
+  </tr>
+<tr th:each="currentRental : ${rentals}" >
+<td th:text="${currentRental.rentalID}" />
+<td th:text="${currentRental.member.memberID}" />
+<td th:text="${currentRental.member.firstName}" />
+<td th:text="${currentRental.movie.title}" />
+<td th:text="${currentRental.checkoutDateTime}" />
+<td th:text="${currentRental.checkinDateTime}" />
+<td><a th:href="@{/update/{id}(id=${currentRental.rentalID})}">Check In</a></td>
+
+</tr>
+</table>
+</form>
+<a href="../rentalRegistration">Rent Another</a>
+</body>
+</html>
