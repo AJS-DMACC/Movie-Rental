@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Movie Type</title>
+<style>
+form {
+  text-align: center;
+}
+body {
+  background-color: #c789b5;
+}
+
+h1 {
+  color: Black;
+  text-align: center;
+}
+
+.btn {
+background-color:  #008CBA;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+</style>
+<script>
+      function validate() {
+    	  
+         if( document.myForm.categoryId.value == "" ) {
+             alert( "Please provide category Id!" );
+             document.myForm.categoryId.focus() ;
+             return false;
+          }
+         
+         if( document.myForm.category.value == "" ) {
+             alert( "Please provide category!" );
+             document.myForm.title.focus() ;
+             return false;
+          }
+         return( true );
+      }
+</script>
+</head>
+<body>
+<h1>Available Movie Types</h1>
+<a href="../viewAllMovies">Go Movie List</a>
+<form th:object="${newMovieType}"  name = "myForm" onsubmit = "return validate();" method='POST'>
+
+<label for="fname">Movie Category ID:</label><br>
+<input name="categoryId" size="20" ><br /><br />
+
+<label for="fname">Movie Categories:</label><br>
+<select id="categories" name="category">
+ 	<option value="select">Select</option>
+    <option value="action">Action</option>
+    <option value="comedy">Comedy</option>
+    <option value="drama">Drama</option>
+    <option value="fantasy">Fantasy</option>
+      <option value="horror">Horror</option>
+    <option value="mystery">Mystery</option>
+    <option value="romance">Romance</option>
+    <option value="thriller">Thriller</option>
+  </select><br></br>
+
+<input name="submit" type="submit" value="submit" class="btn" />
+</form>
+</body>
+</html>
