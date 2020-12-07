@@ -11,6 +11,10 @@ body {
   background-color: skyblue;
 }
 
+.btn {
+background-color: #4CAF50;
+}
+
 h1 {
   color: Black;
   text-align: center;
@@ -61,7 +65,8 @@ p {
 </script>
 </head>
 <body>
-<h1>Fill up the member form</h1>
+<h1>Fill up the Member Registration Form</h1>
+<a href="home">Go Home</a>
 <form th:object="${newMember}" 
 th:action= "@{/updateMember/{id}(id=${newMember.memberID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
@@ -89,7 +94,7 @@ th:field="*{creditCard}"><br /><br />
 <input name="suspension" size="20" 
 th:field="*{suspension}"><br /><br />
 
-<input name="submit" type="submit" value="submit" />
+<input name="submit" type="submit" value="submit" class="btn"  />
 </form>
 </body>
 </html>

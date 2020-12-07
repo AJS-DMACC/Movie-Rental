@@ -3,46 +3,23 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Register an Employee</title>
-<style>
-form {
-  text-align: center;
-}
-body {
-  background-color: skyblue;
-}
-
-h1 {
-  color: Black;
-  text-align: center;
-}
-
-.btn {
-background-color: #4CAF50;
-}
-
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-</style>
 </head>
 <body>
-<h1>Fill up the Employee Registration Form</h1>
-<a href="home">Go Home</a>
+<h2>Fill in Employee form</h2>
 <form th:object="${newEmployee}" method='POST'>
-<label for="fname">First Name:</label><br>
+<label for="fname">First name:</label><br>
 <input name="firstName" size="20" th:field="*{firstName}"><br /><br />
 
 <label for="fname">Last Name:</label><br>
 <input name="lastName" size="20" th:field="*{lastName}"><br /><br />
 
-<label for="fname">User Name:</label><br>
+<label for="fname">Username:</label><br>
 <input name="userName" size="20" th:field="*{userName}"><br /><br />
 
 <label for="fname">Password:</label><br>
 <input name="password" size="20" th:field="*{password}"><br /><br />
 
-<input name="submit" type="submit" value="submit" class="btn" />
+<input name="submit" type="submit" value="submit" />
 </form>
 </body>
 </html>

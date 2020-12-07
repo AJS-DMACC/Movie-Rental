@@ -9,7 +9,7 @@
   margin-right: auto;
 }
 body {
-  background-color: #34eb5f;
+  background-color:#34bdeb;
 }
 
 h1 {
@@ -40,7 +40,7 @@ tr:nth-child(even) {
 </head>
 <body>
 <h1>List of Available Movies</h1>
-<a href="employeeView">Go Home</a>
+<a href="memberView">Go Home</a>
 <form>
 <table class="center">
 <tr>
@@ -48,19 +48,15 @@ tr:nth-child(even) {
     <th>Category-Id</th>
     <th>Value</th>
      <th>Quantity</th>
-    <th>Edit</th>
-    <th>Delete</th>
   </tr>
 <tr th:each="currentMovie : ${movies}" >
 <td th:text="${currentMovie.title}" />
 <td th:text="${currentMovie.categoryId}" />
 <td th:text="${currentMovie.value}" />
 <td th:text="${currentMovie.quantity}" />
-<td><a th:href="@{/editMovie/{id}(id=${currentMovie.movieID})}">Edit</a></td>
-<td><a th:href="@{/deleteMovie/{id}(id=${currentMovie.movieID})}">Delete</a></td>
 </tr>
 </table>
+<a href="rentalRegistration">Rent a Movie</a>
 </form>
-<a href="../addMovie">Add New Movie</a>
 </body>
 </html>

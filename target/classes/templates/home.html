@@ -3,17 +3,57 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Home</title>
+<style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  background-color: #ebb434;
+}
+
+h1 {
+  color: 33ff33;
+  text-align: center;
+}
+
+h2 {
+  color: 33ff33;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
 <h1>Welcome to Movie Rental HomePage</h1>
 <hr>
 <h2>Select a Login Option</h2>
-<table border=1><tr>
+<table border=1, class="center">
+<tr>
 <td><a href="memberLogin">Existing Member</a></td>
 <td><a href="employeeLogin">Existing Employee</a></td>
+<td><a href="memberRegistration">Not a member? Sign up here</a></td>
+<td><a href="employeeRegistration">New Employee? Sign up here (remove later)</a></td>
 </tr></table>
 <hr>
-<a href="memberRegistration">Not a member? Sign up here</a>
-<a href="employeeRegistration">New Employee? Sign up here (remove later)</a>
 </body>
 </html>
