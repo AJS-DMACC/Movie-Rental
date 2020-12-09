@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>All Payment Types</title>
+<style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  background-color: #c2aed0;
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h1>List of Available Payment Types</h1>
+<a href="employeeView">Go Home</a>
+<form>
+<table class="center">
+<tr>
+    <th>Payment ID</th>
+    <th>Payment Type</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+<tr th:each="currentPaymentType : ${paymentTypes}" >
+<td th:text="${currentPaymentType.paymentId}" />
+<td th:text="${currentPaymentType.paymentType}" />
+<td><a th:href="@{/editPaymentType/{id}(id=${currentPaymentType.paymentId})}">Edit</a></td>
+<td><a th:href="@{/deletePaymentType/{id}(id=${currentPaymentType.paymentId})}">Delete</a></td>
+</tr>
+</table>
+</form>
+<a href="../addPaymentType">Add New Payment Type</a>
+</body>
+</html>

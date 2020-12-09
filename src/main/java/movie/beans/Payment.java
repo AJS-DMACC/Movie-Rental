@@ -20,7 +20,6 @@ import lombok.ToString;
 public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long paymentID;
+	private long paymentId;
 	private String paymentType;
-	private long cardNum;
 }
