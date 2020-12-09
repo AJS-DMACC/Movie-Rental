@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Member Home Page</title>
-<<<<<<< Updated upstream
-=======
+<meta charset="UTF-8">
+<title>Movie</title>
 <style>
 .center {
   margin-left: auto;
@@ -81,28 +79,27 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
->>>>>>> Stashed changes
 </head>
 <body>
+<h1>List of Available Movies</h1>
 <div id="header">
-<h1>Remember valued employee: Service is our #1 priority!</h1>
-<<<<<<< Updated upstream
-
-<a href="../viewAllMovie">View All Movies</a>
-<a href="../viewAllMember">View All Members</a>
-<a href="../addMovie">Add A Movie</a>
-<a href="">Edit/Delete A Movie</a>
-=======
-<a href="../home">Logout</a></div>
-<table border=1, class="center">
+<a href="memberView">Go Home</a></div>
+<form>
+<table class="center">
 <tr>
-<td><a href="../viewAllMovie">View All Movies</a></td>
-<td><a href="../viewAllMember">View All Members</a></td>
-<td><a href="../addMovie">Add A Movie</a></td>
-<td><a href="../viewAllMovie">Edit/Delete A Movie</a></td>
-</tr></table>
->>>>>>> Stashed changes
-<hr>
-<a href="">Delete Employee Account</a>
+    <th>Title</th>
+    <th>Category-Id</th>
+    <th>Value</th>
+     <th>Quantity</th>
+  </tr>
+<tr th:each="currentMovie : ${movies}" >
+<td th:text="${currentMovie.title}" />
+<td th:text="${currentMovie.categoryId}" />
+<td th:text="${currentMovie.value}" />
+<td th:text="${currentMovie.quantity}" />
+</tr>
+</table>
+<a href="rentalRegistration">Rent a Movie</a>
+</form>
 </body>
 </html>

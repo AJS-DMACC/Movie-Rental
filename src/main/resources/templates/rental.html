@@ -3,12 +3,85 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Rent a Movie</title>
+<style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
 
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+a{
+	margin: 4px;
+	size: 48px;
+	
+}
+body {
+  background-color: #dcd2c8;
+  font-family: verdana;
+  	padding: 0;
+	margin : 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
 
+#header{
+	background-color: #F96900;
+	padding: 0;
+	margin : 0;
+	width: 100%;
+}
+h1 {
+  color: #110011;
+  text-align: center;
+  margin:0;
+}
+
+h2 {
+  color: #110011;;
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+}
+table { 
+  border-collapse: collapse;
+  border-width: 3px;
+  width: 90%;
+}
+
+td, th {  
+  text-align: center;
+  padding: 8px;
+}
+
+hr{
+height:3px;border-width:0;color:gray;background-color:gray}
+
+form{
+	text-align:center;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.logout{
+text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
+<<<<<<< Updated upstream
 <div class="container">
 <h1 class="text-center">Rent a Movie</h1>
 <form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>	
@@ -25,6 +98,19 @@
 			<c:forEach items="${requestScope.allMovies}" var="currentMovie">
    			<option value = "${currentMovie.id}">${currentMovie.movieName} | ${currentMovie.quantity}</option>
 			</c:forEach>
+=======
+<div class="container justify-content-center">
+<div id="header">
+<h1 class="text-center">Rent a Movie</h1></div>
+<form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>
+		<h2  style="color:red;" th:text="${rentalFail}"></h2>
+	
+		Member: <input name="member.memberID" th:field="*{member.memberID}" hidden><br />
+		<div>
+			<select name="Movie">
+			<option value="">Select a Movie</option>
+			<option th:each="movie : ${movies}" th:value="${movie.movieID}" th:text="${movie.title}"></option>
+>>>>>>> Stashed changes
 			</select>
 			</div>-->
 		<div class="row">

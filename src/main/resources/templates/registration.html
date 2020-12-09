@@ -4,22 +4,80 @@
 <meta charset="UTF-8">
 <title>Member Registration</title>
 <style>
-form {
-  text-align: center;
-}
-body {
-  background-color: skyblue;
+.center {
+  margin-left: auto;
+  margin-right: auto;
 }
 
+a{
+	margin: 4px;
+	size: 48px;
+	
+}
+body {
+  background-color: #dcd2c8;
+  font-family: verdana;
+  	padding: 0;
+	margin : 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+<<<<<<< Updated upstream
+=======
+#header{
+	background-color: #F96900;
+	padding: 0;
+	margin : 0;
+	width: 100%;
+}
+>>>>>>> Stashed changes
 h1 {
-  color: Black;
+  color: #110011;
+  text-align: center;
+  margin:0;
+}
+
+h2 {
+  color: #110011;;
   text-align: center;
 }
 
 p {
-  font-family: verdana;
   font-size: 20px;
 }
+table { 
+  border-collapse: collapse;
+  border-width: 3px;
+  width: 90%;
+}
+
+td, th {  
+  text-align: center;
+  padding: 8px;
+}
+
+td:nth-child(even) {
+  background-color: #dddddd;
+}
+
+hr{
+height:3px;border-width:0;color:gray;background-color:gray}
+
+form{
+	text-align:center;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
 </style>
 <script>
       function validate() {
@@ -61,7 +119,13 @@ p {
 </script>
 </head>
 <body>
+<<<<<<< Updated upstream
 <h1>Fill up the member form</h1>
+=======
+<div id="header">
+<h1>Fill up the Member Registration Form</h1>
+<a href="home">Go Home</a></div>
+>>>>>>> Stashed changes
 <form th:object="${newMember}" 
 th:action= "@{/updateMember/{id}(id=${newMember.id})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
