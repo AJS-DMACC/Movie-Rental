@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import movie.beans.Member;
 import movie.beans.Movie;
+import movie.beans.Payment;
 import movie.beans.Rental;
 import movie.beans.Employee;
 import movie.repository.MemberRepository;
 import movie.repository.MovieRepository;
+import movie.repository.PaymentRepository;
 import movie.repository.RentalRepository;
 import movie.repository.EmployeeRepository;
 
@@ -34,6 +36,8 @@ public class WebController {
 	MovieRepository movieRepo;
 	@Autowired
 	EmployeeRepository empRepo;	
+	@Autowired
+	PaymentRepository payRepo;
 
 	@GetMapping({ "/", "home" })
 	public String homePage() {
@@ -277,6 +281,53 @@ public class WebController {
 	@GetMapping( "/employeeView")
 	public String employeeHomePage() {
 		return "employeeHome";
+	}
+	
+	//================================================================
+	// Payment Type
+	//================================================================
+	
+	@GetMapping("/viewAllPaymentTypes")
+	public String viewAllPaymentTypes(Model model) {
+		if (payRepo.findAll().isEmpty()) {
+			return addNewPaymentType(model);
+		}
+		model.addAttribute("paymentTypes", payRepo.findAll());
+		return "paymentTypeList";
+	}
+
+
+	@GetMapping("/addPaymentType")
+	public String addNewPaymentType(Model model) {
+		Payment p = new Payment();
+		model.addAttribute("newPaymentType", p);
+		return "addPaymentType";
+	}
+
+	@PostMapping("/addPaymentType")
+	public String addNewPaymentType(@ModelAttribute Payment p, Model model) {
+		payRepo.save(p);
+		return viewAllPaymentTypes(model);
+	}
+
+	@GetMapping("/editPaymentType/{id}")
+	public String showUpdatePaymentType(@PathVariable("id") long id, Model model) {
+		Payment p = payRepo.findById(id).orElse(null);
+		model.addAttribute("newPaymentType", p);
+		return "addPaymentType";
+	}
+
+	@PostMapping("/updatePaymentType/{id}")
+	public String revisePaymentType(Payment p, Model model) {
+		payRepo.save(p);
+		return viewAllPaymentTypes(model);
+	}
+
+	@GetMapping("/deletePaymentType/{id}")
+	public String deletePaymentType(@PathVariable("id") long id, Model model) {
+		Payment p = payRepo.findById(id).orElse(null);
+		payRepo.delete(p);
+		return viewAllPaymentTypes(model);
 	}
 
 	@GetMapping("/style.css")

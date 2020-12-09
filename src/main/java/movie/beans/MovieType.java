@@ -17,12 +17,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Movie {
+public class MovieType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long movieID;
-	private String title;
 	private int categoryId;
-	private int value;
-	private int quantity;
+	private String category;
 }
