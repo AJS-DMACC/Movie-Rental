@@ -330,4 +330,8 @@ public class WebController {
 		return viewAllPaymentTypes(model);
 	}
 
+	@GetMapping("/style.css")
+	public String stylesheet() {
+		return "style.css";
+	}
 }

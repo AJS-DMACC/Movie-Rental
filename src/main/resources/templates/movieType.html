@@ -3,28 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Movie Type</title>
-<style>
-form {
-  text-align: center;
-}
-body {
-  background-color: #c789b5;
-}
-
-h1 {
-  color: Black;
-  text-align: center;
-}
-
-.btn {
-background-color:  #008CBA;
-}
-
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-</style>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
 <script>
       function validate() {
     	  
@@ -44,8 +23,10 @@ p {
 </script>
 </head>
 <body>
+<div id="header">
 <h1>Available Movie Types</h1>
 <a href="../viewAllMovies">Go Movie List</a>
+</div>
 <form th:object="${newMovieType}"  name = "myForm" onsubmit = "return validate();" method='POST'>
 
 <label for="fname">Movie Category ID:</label><br>

@@ -3,32 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Register an Employee</title>
-<style>
-form {
-  text-align: center;
-}
-body {
-  background-color: skyblue;
-}
-
-h1 {
-  color: Black;
-  text-align: center;
-}
-
-.btn {
-background-color: #4CAF50;
-}
-
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-</style>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
 </head>
 <body>
+<div id="header">
 <h1>Fill up the Employee Registration Form</h1>
 <a href="home">Go Home</a>
+</div>
 <form th:object="${newEmployee}" method='POST'>
 <label for="fname">First Name:</label><br>
 <input name="firstName" size="20" th:field="*{firstName}"><br /><br />
