@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import movie.beans.Member;
 import movie.beans.Movie;
+import movie.beans.MovieType;
 import movie.beans.Rental;
 import movie.beans.Employee;
 import movie.repository.MemberRepository;
 import movie.repository.MovieRepository;
+import movie.repository.MovieTypeRepository;
 import movie.repository.RentalRepository;
 import movie.repository.EmployeeRepository;
 
@@ -34,6 +36,8 @@ public class WebController {
 	MovieRepository movieRepo;
 	@Autowired
 	EmployeeRepository empRepo;	
+	@Autowired
+	MovieTypeRepository mTypeRepo;
 
 	@GetMapping({ "/", "home" })
 	public String homePage() {
@@ -157,6 +161,23 @@ public class WebController {
 		Movie m = movieRepo.findById(id).orElse(null);
 		movieRepo.delete(m);
 		return viewAllMovies(model);
+	}
+	
+	//================================================================
+	// Movie type 
+	//================================================================
+	
+	@GetMapping("/movieType")
+	public String addNewMovieType(Model model) {
+		MovieType m = new MovieType();
+		model.addAttribute("newMovieType", m);
+		return "movieType";
+	}
+
+	@PostMapping("/movieType")
+	public String addNewMovieType(@ModelAttribute MovieType m, Model model) {
+		mTypeRepo.save(m);
+		return viewAllMovie(model);
 	}
 
 //================================================================
