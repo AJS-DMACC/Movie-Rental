@@ -32,8 +32,10 @@
 </script>
 </head>
 <body>
+<div id="header">
 <h1>Add or Update Movie on the list</h1>
 <a href="../viewAllMovie">Go Movie List</a>
+</div>
 <form th:object="${newMovie}" 
 th:action= "@{/updateMovie/{id}(id=${newMovie.movieID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 

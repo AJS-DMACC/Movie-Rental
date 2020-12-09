@@ -7,7 +7,9 @@
 </head>
 <body>
 <div class="container justify-content-center">
+<div id="header">
 <h1 class="text-center">Rent a Movie</h1>
+</div>
 <form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>
 		<h2  style="color:red;" th:text="${rentalFail}"></h2>
 	

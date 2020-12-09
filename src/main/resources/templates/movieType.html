@@ -23,8 +23,10 @@
 </script>
 </head>
 <body>
+<div id="header">
 <h1>Available Movie Types</h1>
 <a href="../viewAllMovies">Go Movie List</a>
+</div>
 <form th:object="${newMovieType}"  name = "myForm" onsubmit = "return validate();" method='POST'>
 
 <label for="fname">Movie Category ID:</label><br>
