@@ -279,4 +279,8 @@ public class WebController {
 		return "employeeHome";
 	}
 
+	@GetMapping("/style.css")
+	public String stylesheet() {
+		return "style.css";
+	}
 }
