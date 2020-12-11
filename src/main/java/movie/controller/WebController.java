@@ -55,7 +55,7 @@ public class WebController {
 	public String addNewEmployee(@ModelAttribute Employee e, Model model) {
 		System.out.println(e.toString() );
 		empRepo.save(e);
-		return "home";
+		return "employeeHome";
 	}
 	
 	// Member registration
@@ -97,7 +97,7 @@ public class WebController {
 	@PostMapping("/updateMember/{id}")
 	public String reviseMember(Member m, Model model) {
 		memberRepo.save(m);
-		return viewAllMembers(model);
+		return "memberHome";
 	}
 
 	@GetMapping("/deleteMember/{id}")
@@ -184,6 +184,7 @@ public class WebController {
 		
 		try {
 		rentRepo.save(r);
+		System.out.println(r.toString());
 		
 		}catch(Exception e) {
 			model.addAttribute("rentalFail", "You must be a member to rent a movie!");
