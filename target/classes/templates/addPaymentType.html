@@ -41,8 +41,8 @@
 <form th:object="${newPaymentType}" 
 th:action= "@{/updatePaymentType/{id}(id=${newPaymentType.paymentId})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
-<label for="paymentTypeId">Payment Type Id:</label><br>
-<input name="paymentId" size="20" th:field="*{paymentId}"><br /><br />
+<!-- <label for="paymentTypeId">Payment Type Id:</label><br>
+<input name="paymentId" size="20" th:field="*{paymentId}"><br /><br />-->
 
 <label for="paymentType">Payment Type:</label><br>
 <input name="paymentType" size="20" th:field="*{paymentType}"><br /><br />
