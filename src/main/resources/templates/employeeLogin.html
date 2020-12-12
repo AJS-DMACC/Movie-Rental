@@ -3,17 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Employee Login</title>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
 </head>
 <body>
+<div id="header">
+<h1>Enter Employee Login </h1>
+<a href="home">Go Home</a>
+</div>
 <h2  style="color:red;" th:text="${failMessage}"></h2>
 <form th:object="${employee}"  method='POST'>
-<label for="fname">User name:</label><br>
+<label for="fname">User Name:</label><br>
 <input name="userName" size="20" th:field="*{userName}"><br /><br />
 
 <label for="fname">Password:</label><br>
 <input name="password" size="20" th:field="*{password}"><br /><br />
 
-<input name="submit" type="submit" value="submit" />
+<input name="submit" type="submit" value="submit" class="btn" />
 </form>
 </body>
 </html>

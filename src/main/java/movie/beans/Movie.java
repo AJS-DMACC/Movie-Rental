@@ -25,6 +25,4 @@ public class Movie {
 	private int categoryId;
 	private int value;
 	private int quantity;
-	
-
 }

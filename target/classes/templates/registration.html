@@ -3,24 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Member Registration</title>
-<style>
-form {
-  text-align: center;
-}
-body {
-  background-color: skyblue;
-}
-
-h1 {
-  color: Black;
-  text-align: center;
-}
-
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-</style>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
 <script>
       function validate() {
       
@@ -61,7 +44,10 @@ p {
 </script>
 </head>
 <body>
-<h1>Fill up the member form</h1>
+<div id="header">
+<h1>Fill up the Member Registration Form</h1>
+<a href="home">Go Home</a>
+</div>
 <form th:object="${newMember}" 
 th:action= "@{/updateMember/{id}(id=${newMember.memberID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
@@ -89,7 +75,7 @@ th:field="*{creditCard}"><br /><br />
 <input name="suspension" size="20" 
 th:field="*{suspension}"><br /><br />
 
-<input name="submit" type="submit" value="submit" />
+<input name="submit" type="submit" value="submit" class="btn"  />
 </form>
 </body>
 </html>

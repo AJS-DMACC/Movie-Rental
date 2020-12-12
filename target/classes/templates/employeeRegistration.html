@@ -3,23 +3,27 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Register an Employee</title>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
 </head>
 <body>
-<h2>Fill in Employee form</h2>
+<div id="header">
+<h1>Fill up the Employee Registration Form</h1>
+<a href="home">Go Home</a>
+</div>
 <form th:object="${newEmployee}" method='POST'>
-<label for="fname">First name:</label><br>
+<label for="fname">First Name:</label><br>
 <input name="firstName" size="20" th:field="*{firstName}"><br /><br />
 
 <label for="fname">Last Name:</label><br>
 <input name="lastName" size="20" th:field="*{lastName}"><br /><br />
 
-<label for="fname">Username:</label><br>
+<label for="fname">User Name:</label><br>
 <input name="userName" size="20" th:field="*{userName}"><br /><br />
 
 <label for="fname">Password:</label><br>
 <input name="password" size="20" th:field="*{password}"><br /><br />
 
-<input name="submit" type="submit" value="submit" />
+<input name="submit" type="submit" value="submit" class="btn" />
 </form>
 </body>
 </html>

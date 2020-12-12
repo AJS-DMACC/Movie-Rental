@@ -3,39 +3,54 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Rent a Movie</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
-<form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>	
-		<label for="memberID">Member:</label> 
-		<input name="memberID" size="4"><br>
-		
-		<!--   <label for="movieID">Movie: </label>
-			<select name="allMovies">
-			<c:forEach items="${requestScope.allMovies}" var="currentMovie">
-   			<option value = "${currentMovie.id}">${currentMovie.movieName} | ${currentMovie.quantity}</option>
-			</c:forEach>
+<div class="container justify-content-center">
+<h1 class="text-center">Rent a Movie</h1>
+<form th:object="${newRental}" th:action="@{/rentalRegistration}" method='POST'>
+		<h2  style="color:red;" th:text="${rentalFail}"></h2>
+	
+		Member: <input name="member.memberID" th:field="*{member.memberID}" hidden><br />
+		<div>
+			<select name="Movie">
+			<option value="">Select a Movie</option>
+			<option th:each="movie : ${movies}" th:value="${movie.movieID}" th:text="${movie.title}"></option>
 			</select>
-			</div>-->
-			
-		<h2>Payment Method: </h2>
+		</div>
+		
+		<p>Payment Method: </p>
+		
+		<div class="ml-5">
 		<input type="radio" name="paymentMethod" id="account" value="1" >
 		<label for="account">Account</label>
 		
-		<input type="radio" name="paymentMethod" id="creditCard" value="2">
+		<br>
+		<input type="radio" name="paymentMethod" id="creditCard" value="2" checked>
 		<label for="creditCard">Credit Card</label>
 		
+		<br>
 		<input type="radio" name="paymentMethod" id="check" value="3" >
 		<label for="check">Check</label>
-		
+	
+		<br>
 		<input type="radio" name="paymentMethod" id="cash" value="4" >
 		<label for="cash">Cash</label>
 		
+		<br>		
 		<input type="radio" name="paymentMethod" id="debit" value="5" >
 		<label for="debit">Debit Card</label>
+		</div>
+		<br>		
 		
-		
-		
-		<input name="submit" type="submit" value="submit"/>
+		<button type="submit" class="btn btn-dark">Rent</button>
 	</form>
+	</div>
+	
+	
+	
 </body>
 </html>

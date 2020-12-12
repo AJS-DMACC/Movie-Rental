@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Movie</title>
+<style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h1>List of Available Movies</h1>
+<a href="../viewAllMember">Add new Movie</a>
+<form>
+<table class="center">
+<tr>
+    <th>Title</th>
+    <th>Category-Id</th>
+    <th>Value</th>
+     <th>Quantity</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+<tr th:each="currentMovie : ${movies}" >
+<td th:text="${currentMovie.title}" />
+<td th:text="${currentMovie.categoryId}" />
+<td th:text="${currentMovie.value}" />
+<td th:text="${currentMovie.quantity}" />
+<td><a th:href="@{/editMovie/{id}(id=${currentMovie.movieID})}">Edit</a></td>
+<td><a th:href="@{/deleteMovie/{id}(id=${currentMovie.movieID})}">Delete</a></td>
+</tr>
+</table>
+</form>
+<a href="../addMovie">Add new Movie</a>
+</body>
+</html>

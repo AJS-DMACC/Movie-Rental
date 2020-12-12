@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import movie.beans.Member;
 import movie.beans.Movie;
+import movie.beans.Payment;
 import movie.beans.Rental;
 import movie.beans.Employee;
 import movie.repository.MemberRepository;
 import movie.repository.MovieRepository;
+import movie.repository.PaymentRepository;
 import movie.repository.RentalRepository;
 import movie.repository.EmployeeRepository;
 
@@ -34,6 +36,8 @@ public class WebController {
 	MovieRepository movieRepo;
 	@Autowired
 	EmployeeRepository empRepo;	
+	@Autowired
+	PaymentRepository payRepo;
 
 	@GetMapping({ "/", "home" })
 	public String homePage() {
@@ -51,7 +55,7 @@ public class WebController {
 	public String addNewEmployee(@ModelAttribute Employee e, Model model) {
 		System.out.println(e.toString() );
 		empRepo.save(e);
-		return "home";
+		return "employeeHome";
 	}
 	
 	// Member registration
@@ -93,7 +97,7 @@ public class WebController {
 	@PostMapping("/updateMember/{id}")
 	public String reviseMember(Member m, Model model) {
 		memberRepo.save(m);
-		return viewAllMembers(model);
+		return "memberHome";
 	}
 
 	@GetMapping("/deleteMember/{id}")
@@ -113,6 +117,15 @@ public class WebController {
 		return "movielist";
 	}
 
+	@GetMapping("/viewAllMovies")
+	public String viewAllMovie(Model model) {
+		if (movieRepo.findAll().isEmpty()) {
+			return addNewMovie(model);
+		}
+		model.addAttribute("movies", movieRepo.findAll());
+		return "membersMovieList";
+	}
+	
 	// Adding movie
 
 	@GetMapping("/addMovie")
@@ -171,6 +184,7 @@ public class WebController {
 		
 		try {
 		rentRepo.save(r);
+		System.out.println(r.toString());
 		
 		}catch(Exception e) {
 			model.addAttribute("rentalFail", "You must be a member to rent a movie!");
@@ -269,5 +283,56 @@ public class WebController {
 	public String employeeHomePage() {
 		return "employeeHome";
 	}
+	
+	//================================================================
+	// Payment Type
+	//================================================================
+	
+	@GetMapping("/viewAllPaymentTypes")
+	public String viewAllPaymentTypes(Model model) {
+		if (payRepo.findAll().isEmpty()) {
+			return addNewPaymentType(model);
+		}
+		model.addAttribute("paymentTypes", payRepo.findAll());
+		return "paymentTypeList";
+	}
 
+
+	@GetMapping("/addPaymentType")
+	public String addNewPaymentType(Model model) {
+		Payment p = new Payment();
+		model.addAttribute("newPaymentType", p);
+		return "addPaymentType";
+	}
+
+	@PostMapping("/addPaymentType")
+	public String addNewPaymentType(@ModelAttribute Payment p, Model model) {
+		payRepo.save(p);
+		return viewAllPaymentTypes(model);
+	}
+
+	@GetMapping("/editPaymentType/{id}")
+	public String showUpdatePaymentType(@PathVariable("id") long id, Model model) {
+		Payment p = payRepo.findById(id).orElse(null);
+		model.addAttribute("newPaymentType", p);
+		return "addPaymentType";
+	}
+
+	@PostMapping("/updatePaymentType/{id}")
+	public String revisePaymentType(Payment p, Model model) {
+		payRepo.save(p);
+		return viewAllPaymentTypes(model);
+	}
+
+	@GetMapping("/deletePaymentType/{id}")
+	public String deletePaymentType(@PathVariable("id") long id, Model model) {
+		Payment p = payRepo.findById(id).orElse(null);
+		payRepo.delete(p);
+		return viewAllPaymentTypes(model);
+	}
+
+	@GetMapping("/style.css")
+	public String stylesheet() {
+		return "style.css";
+	}
 }

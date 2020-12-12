@@ -7,3 +7,6 @@ bin/.project
 .project
 target/classes/META-INF/maven/movie/MovieRental/pom.properties
 .classpath
+src/main/resources/application.properties
+target/classes/META-INF/MANIFEST.MF
+*.class

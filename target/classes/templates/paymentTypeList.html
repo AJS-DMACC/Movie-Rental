@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>All Payment Types</title>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
+</head>
+<body>
+<div id="header">
+<h1>List of Available Payment Types</h1>
+<a href="../employeeView">Go Home</a>
+</div>
+<form>
+<table class="center">
+<tr>
+    <th>Payment ID</th>
+    <th>Payment Type</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+<tr th:each="currentPaymentType : ${paymentTypes}" >
+<td th:text="${currentPaymentType.paymentId}" />
+<td th:text="${currentPaymentType.paymentType}" />
+<td><a th:href="@{/editPaymentType/{id}(id=${currentPaymentType.paymentId})}">Edit</a></td>
+<td><a th:href="@{/deletePaymentType/{id}(id=${currentPaymentType.paymentId})}">Delete</a></td>
+</tr>
+</table>
+</form>
+<a href="../addPaymentType">Add New Payment Type</a>
+</body>
+</html>

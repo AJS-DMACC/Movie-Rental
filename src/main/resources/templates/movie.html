@@ -3,24 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Movie</title>
-<style>
-form {
-  text-align: center;
-}
-body {
-  background-color: turquoise;
-}
-
-h1 {
-  color: Black;
-  text-align: center;
-}
-
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-</style>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
 <script>
       function validate() {
       
@@ -49,8 +32,10 @@ p {
 </script>
 </head>
 <body>
+<div id="header">
 <h1>Add or Update Movie on the list</h1>
 <a href="../viewAllMovie">Go Movie List</a>
+</div>
 <form th:object="${newMovie}" 
 th:action= "@{/updateMovie/{id}(id=${newMovie.movieID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
@@ -70,7 +55,7 @@ th:field="*{value}"><br /><br />
 <input name="quantity" size="20"
 th:field="*{quantity}"><br /><br />
 
-<input name="submit" type="submit" value="submit" />
+<input name="submit" type="submit" value="submit" class="btn" />
 </form>
 </body>
 </html>

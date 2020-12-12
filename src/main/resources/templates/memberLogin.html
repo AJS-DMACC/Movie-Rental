@@ -3,11 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Member Login</title>
+<link rel="stylesheet" href="/style.css" type="text/css"/>
 </head>
 <body>
+<div id="header">
+<h1>Enter Member Login  </h1>
+<a href="home">Go Home</a>
+</div>
 <h2  style="color:red;" th:text="${failMessage}"></h2>
 <form th:object="${member}"  method='POST'>
-<label for="fname">First name:</label><br>
+<label for="fname">First Name:</label><br>
 <input name="firstName" size="20" th:field="*{firstName}"><br /><br />
 
 <label for="fname">Last Name:</label><br>
@@ -16,7 +21,7 @@
 <label for="fname">Credit Card:</label><br>
 <input name="creditCard" size="20" th:field="*{creditCard}"><br /><br />
 
-<input name="submit" type="submit" value="submit" />
+<input name="submit" type="submit" value="submit" class="btn"/>
 </form>
 </body>
 </html>
