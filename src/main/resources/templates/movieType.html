@@ -23,29 +23,16 @@
 </script>
 </head>
 <body>
-<div id="header">
-<h1>Available Movie Types</h1>
-<a href="../viewAllMovies">Go Movie List</a>
-</div>
-<form th:object="${newMovieType}"  name = "myForm" onsubmit = "return validate();" method='POST'>
-
-<label for="fname">Movie Category ID:</label><br>
-<input name="categoryId" size="20" ><br /><br />
-
-<label for="fname">Movie Categories:</label><br>
-<select id="categories" name="category">
- 	<option value="select">Select</option>
-    <option value="action">Action</option>
-    <option value="comedy">Comedy</option>
-    <option value="drama">Drama</option>
-    <option value="fantasy">Fantasy</option>
-      <option value="horror">Horror</option>
-    <option value="mystery">Mystery</option>
-    <option value="romance">Romance</option>
-    <option value="thriller">Thriller</option>
-  </select><br></br>
-
-<input name="submit" type="submit" value="submit" class="btn" />
-</form>
+	<div id="header">
+		<h1>Add a Movie Type</h1>
+			<a href="../viewAllMovies">View Movie List</a>
+	</div>
+	<form th:object="${newMovieType}"  name = "myForm" onsubmit = "return validate();" method='POST'>
+		<br>
+		<br>
+		<label for="category">Category Name:</label>
+		<input type="text" name="category">
+		<input name="submit" type="submit" value="Add" class="btn" />
+	</form>
 </body>
 </html>

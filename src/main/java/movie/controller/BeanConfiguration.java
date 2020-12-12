@@ -3,6 +3,7 @@ package movie.controller;
 import movie.beans.Employee;
 import movie.beans.Member;
 import movie.beans.Movie;
+import movie.beans.MovieType;
 import movie.beans.Payment;
 
 public class BeanConfiguration {
@@ -24,6 +25,11 @@ public class BeanConfiguration {
 	
 	public Employee employee() {
 		Employee bean = new Employee();
+		return bean;
+	}
+	
+	public MovieType movietype() {
+		MovieType bean = new MovieType();
 		return bean;
 	}
 }
