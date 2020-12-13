@@ -87,21 +87,21 @@ public class WebController {
 
 	// Edit delete update member
 
-	@GetMapping("/editMember/{id}")
-	public String showUpdateMember(@PathVariable("id") long id, Model model) {
+	@GetMapping("/editMember/{memberID}")
+	public String showUpdateMember(@PathVariable("memberID") long id, Model model) {
 		Member m = memberRepo.findById(id).orElse(null);
 		model.addAttribute("newMember", m);
 		return "registration";
 	}
 
-	@PostMapping("/updateMember/{id}")
+	@PostMapping("/updateMember/{memberID}")
 	public String reviseMember(Member m, Model model) {
 		memberRepo.save(m);
-		return "memberHome";
+		return viewAllMembers(model);
 	}
 
-	@GetMapping("/deleteMember/{id}")
-	public String deleteMemberUser(@PathVariable("id") long id, Model model) {
+	@GetMapping("/deleteMember/{memberID}")
+	public String deleteMemberUser(@PathVariable("memberID") long id, Model model) {
 		Member m = memberRepo.findById(id).orElse(null);
 		memberRepo.delete(m);
 		return viewAllMembers(model);
@@ -143,21 +143,21 @@ public class WebController {
 
 	// Edit delete update movie
 
-	@GetMapping("/editMovie/{id}")
-	public String showUpdateMovie(@PathVariable("id") long id, Model model) {
+	@GetMapping("/editMovie/{movieID}")
+	public String showUpdateMovie(@PathVariable("movieID") long id, Model model) {
 		Movie m = movieRepo.findById(id).orElse(null);
 		model.addAttribute("newMovie", m);
 		return "movie";
 	}
 
-	@PostMapping("/updateMovie/{id}")
+	@PostMapping("/updateMovie/{movieID}")
 	public String reviseMovie(Movie m, Model model) {
 		movieRepo.save(m);
 		return viewAllMovies(model);
 	}
 
-	@GetMapping("/deleteMovie/{id}")
-	public String deleteMovieUser(@PathVariable("id") long id, Model model) {
+	@GetMapping("/deleteMovie/{movieID}")
+	public String deleteMovieUser(@PathVariable("movieID") long id, Model model) {
 		Movie m = movieRepo.findById(id).orElse(null);
 		movieRepo.delete(m);
 		return viewAllMovies(model);
@@ -311,21 +311,21 @@ public class WebController {
 		return viewAllPaymentTypes(model);
 	}
 
-	@GetMapping("/editPaymentType/{id}")
-	public String showUpdatePaymentType(@PathVariable("id") long id, Model model) {
+	@GetMapping("/editPaymentType/{paymentId}")
+	public String showUpdatePaymentType(@PathVariable("paymentId") long id, Model model) {
 		Payment p = payRepo.findById(id).orElse(null);
 		model.addAttribute("newPaymentType", p);
 		return "addPaymentType";
 	}
 
-	@PostMapping("/updatePaymentType/{id}")
+	@PostMapping("/updatePaymentType/{paymentId}")
 	public String revisePaymentType(Payment p, Model model) {
 		payRepo.save(p);
 		return viewAllPaymentTypes(model);
 	}
 
-	@GetMapping("/deletePaymentType/{id}")
-	public String deletePaymentType(@PathVariable("id") long id, Model model) {
+	@GetMapping("/deletePaymentType/{paymentId}")
+	public String deletePaymentType(@PathVariable("paymentId") long id, Model model) {
 		Payment p = payRepo.findById(id).orElse(null);
 		payRepo.delete(p);
 		return viewAllPaymentTypes(model);
