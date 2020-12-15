@@ -52,7 +52,7 @@
 <form th:object="${newMember}" 
 th:action= "@{/updateMember/{id}(id=${newMember.memberID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
-<label for="fname">First name:</label><br>
+<label for="fname">First Name:</label><br>
 <input name="firstName" size="20" 
 th:field="*{firstName}"><br /><br />
 
@@ -60,15 +60,15 @@ th:field="*{firstName}"><br /><br />
 <input name="lastName" size="20" 
 th:field="*{lastName}"><br /><br />
 
-<label for="fname">License No:</label><br>
+<label for="fname">Drivers License Number:</label><br>
 <input name="licenseNo" size="20" 
 th:field="*{licenseNo}"><br /><br />
 
-<label for="fname">License St:</label><br>
+<label for="fname">License State:</label><br>
 <input name="licenseSt" size="20" 
 th:field="*{licenseSt}"><br /><br />
 
-<label for="fname">Credit Card:</label><br>
+<label for="fname">Credit Card Number:</label><br>
 <input name="creditCard" size="20" 
 th:field="*{creditCard}"><br /><br />
 

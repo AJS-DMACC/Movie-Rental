@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import movie.beans.Member;
 import movie.beans.Movie;
+import movie.beans.MovieType;
 import movie.beans.Payment;
 import movie.beans.Rental;
 import movie.beans.Employee;
@@ -25,6 +26,7 @@ import movie.repository.MovieRepository;
 import movie.repository.PaymentRepository;
 import movie.repository.RentalRepository;
 import movie.repository.EmployeeRepository;
+import movie.repository.MovieTypeRepository;
 
 @Controller
 public class WebController {
@@ -38,6 +40,8 @@ public class WebController {
 	EmployeeRepository empRepo;	
 	@Autowired
 	PaymentRepository payRepo;
+	@Autowired
+	MovieTypeRepository movieTypeRepo;
 
 	@GetMapping({ "/", "home" })
 	public String homePage() {
@@ -70,9 +74,9 @@ public class WebController {
 	@PostMapping("/memberRegistration")
 	public String addNewMembers(@ModelAttribute Member m, Model model, HttpSession session) {
 		memberRepo.save(m);
-		long memID = m.getMemberID();
-		session.setAttribute("memID", memID);
-		return viewAllMembers(model);
+		session.setAttribute("member", m);
+		System.out.println(m);
+		return "memberHome";
 	}
 
 	// viewAllMember
@@ -95,11 +99,14 @@ public class WebController {
 	}
 
 	@PostMapping("/updateMember/{memberID}")
-	public String reviseMember(Member m, Model model) {
+	public String reviseMember(Member m, Model model, HttpSession session) {
 		memberRepo.save(m);
-		return viewAllMembers(model);
-	}
+		session.setAttribute("member", m);
+		System.out.println("Session Attribute Set to: " + session.getAttribute("member"));
 
+		return homePage();
+	}
+	
 	@GetMapping("/deleteMember/{memberID}")
 	public String deleteMemberUser(@PathVariable("memberID") long id, Model model) {
 		Member m = memberRepo.findById(id).orElse(null);
@@ -132,6 +139,8 @@ public class WebController {
 	public String addNewMovie(Model model) {
 		Movie m = new Movie();
 		model.addAttribute("newMovie", m);
+		List<MovieType> movieTypes = movieTypeRepo.findAll();
+		model.addAttribute("movieTypes", movieTypes);
 		return "movie";
 	}
 
@@ -147,6 +156,8 @@ public class WebController {
 	public String showUpdateMovie(@PathVariable("movieID") long id, Model model) {
 		Movie m = movieRepo.findById(id).orElse(null);
 		model.addAttribute("newMovie", m);
+		List<MovieType> movieTypes = movieTypeRepo.findAll();
+		model.addAttribute("movieTypes", movieTypes);
 		return "movie";
 	}
 
@@ -283,6 +294,56 @@ public class WebController {
 	public String employeeHomePage() {
 		return "employeeHome";
 	}
+	
+	//================================================================
+	// Movie Type
+	//================================================================
+
+			@GetMapping("/viewAllMovieTypes")
+			public String viewAllMovieTypes(Model model) {
+				if (movieTypeRepo.findAll().isEmpty()) {
+					return addNewMovieType(model);
+				}
+				model.addAttribute("moiveTypes", movieTypeRepo.findAll());
+				return viewAllMovie(model);
+			}
+
+
+			@GetMapping("/addMovieType")
+			public String addNewMovieType(Model model) {
+				MovieType mt = new MovieType();
+				model.addAttribute("newMovieType", mt);
+				return "MovieType";
+			}
+
+			@PostMapping("/addMovieType")
+			public String addNewMovieType(@ModelAttribute MovieType mt, Model model) {
+				movieTypeRepo.save(mt);
+				return addNewMovie(model);
+			}
+
+			@GetMapping("/editMovieType/{id}")
+			public String showUpdateMovieType(@PathVariable("id") long id, Model model) {
+				MovieType mt = movieTypeRepo.findById(id).orElse(null);
+				model.addAttribute("newMovieType", mt);
+				return "employeeHome";
+			}
+
+			@PostMapping("/updateMovieType/{id}")
+			public String reviseMovieType(MovieType mt, Model model) {
+				movieTypeRepo.save(mt);
+				return viewAllMovieTypes(model);
+			}
+
+			@GetMapping("/deleteMovieType/{id}")
+			public String deleteMovieType(@PathVariable("id") long id, Model model) {
+				MovieType mt = movieTypeRepo.findById(id).orElse(null);
+				movieTypeRepo.delete(mt);
+				return viewAllMovieTypes(model);
+			}
+
+	// End MovieType =============================================================
+
 	
 	//================================================================
 	// Payment Type
