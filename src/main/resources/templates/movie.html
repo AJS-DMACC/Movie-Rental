@@ -27,6 +27,11 @@
              document.myForm.quantity.focus() ;
              return false;
           }
+         if(document.myForm.MovieType.value == ""){
+        	 alert( "You must choose a movie type" );
+             //document.myForm.movieType.focus() ;
+             return false;
+         }
          return( true );
       }
 </script>
@@ -43,10 +48,14 @@ th:action= "@{/updateMovie/{id}(id=${newMovie.movieID})}" name = "myForm" onsubm
 <input name="title" size="20" 
 th:field="*{title}"><br /><br />
 
-<label for="fname">Movie Category ID:</label><br>
-<input name="categoryId" size="20" 
-th:field="*{categoryId}"><br /><br />
-
+<div>
+<label for="MovieType">Movie Category:</label>
+	<select name="MovieType" id="MovieType">
+		<option th:each="movieType : ${movieTypes}" th:value="${movieType.categoryId}" th:text="${movieType.category}"></option>
+	</select>
+	<a href="../addMovieType">Add a movie type</a>
+</div>
+<br>
 <label for="fname">Movie Value:</label><br>
 <input name="value" size="20" 
 th:field="*{value}"><br /><br />

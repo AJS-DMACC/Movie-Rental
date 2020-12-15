@@ -13,17 +13,12 @@
 <form  method=POST>
 <table class="center">
 <tr>
-    <th>Rental ID</th>
-    <th>Member ID</th>
-    <th>Member</th>
+
     <th>Movie</th>
      <th>Checkout</th>
     <th>Check-in</th>
   </tr>
 <tr th:each="currentRental : ${rentals}" >
-<td th:text="${currentRental.rentalID}" />
-<td th:text="${currentRental.member.memberID}" />
-<td th:text="${currentRental.member.firstName}" />
 <td th:text="${currentRental.movie.title}" />
 <td th:text="${currentRental.checkoutDateTime}" />
 <td th:text="${currentRental.checkinDateTime}" />

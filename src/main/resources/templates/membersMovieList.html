@@ -20,12 +20,11 @@
   </tr>
 <tr th:each="currentMovie : ${movies}" >
 <td th:text="${currentMovie.title}" />
-<td th:text="${currentMovie.categoryId}" />
+<td th:text="${currentMovie.movieType.category}" />
 <td th:text="${currentMovie.value}" />
 <td th:text="${currentMovie.quantity}" />
 </tr>
 </table>
-<a href="../rentalRegistration">Rent a Movie</a><br></br>
 </form>
 </body>
 </html>
