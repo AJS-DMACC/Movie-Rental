@@ -17,13 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import movie.beans.Member;
 import movie.beans.Movie;
-import movie.beans.MovieType;
 import movie.beans.Payment;
 import movie.beans.Rental;
 import movie.beans.Employee;
 import movie.repository.MemberRepository;
 import movie.repository.MovieRepository;
-import movie.repository.MovieTypeRepository;
 import movie.repository.PaymentRepository;
 import movie.repository.RentalRepository;
 import movie.repository.EmployeeRepository;
@@ -40,8 +38,6 @@ public class WebController {
 	EmployeeRepository empRepo;	
 	@Autowired
 	PaymentRepository payRepo;
-	@Autowired
-	MovieTypeRepository movieTypeRepo;
 
 	@GetMapping({ "/", "home" })
 	public String homePage() {
@@ -73,10 +69,9 @@ public class WebController {
 
 	@PostMapping("/memberRegistration")
 	public String addNewMembers(@ModelAttribute Member m, Model model, HttpSession session) {
-		System.out.println(m);
 		memberRepo.save(m);
-		session.setAttribute("member", m);
-		System.out.println(m);
+		long memID = m.getMemberID();
+		session.setAttribute("memID", memID);
 		return viewAllMembers(model);
 	}
 
@@ -92,24 +87,21 @@ public class WebController {
 
 	// Edit delete update member
 
-	@GetMapping("/editMember/{id}")
-	public String showUpdateMember(@PathVariable("id") long id, Model model) {
+	@GetMapping("/editMember/{memberID}")
+	public String showUpdateMember(@PathVariable("memberID") long id, Model model) {
 		Member m = memberRepo.findById(id).orElse(null);
 		model.addAttribute("newMember", m);
 		return "registration";
 	}
 
-	@PostMapping("/updateMember/{id}")
-	public String reviseMember(Member m, Model model, HttpSession session) {
+	@PostMapping("/updateMember/{memberID}")
+	public String reviseMember(Member m, Model model) {
 		memberRepo.save(m);
-		session.setAttribute("member", m);
-		System.out.println("Session Attribute Set to: " + session.getAttribute("member"));
-
-		return "memberHome";
+		return viewAllMembers(model);
 	}
 
-	@GetMapping("/deleteMember/{id}")
-	public String deleteMemberUser(@PathVariable("id") long id, Model model) {
+	@GetMapping("/deleteMember/{memberID}")
+	public String deleteMemberUser(@PathVariable("memberID") long id, Model model) {
 		Member m = memberRepo.findById(id).orElse(null);
 		memberRepo.delete(m);
 		return viewAllMembers(model);
@@ -140,10 +132,6 @@ public class WebController {
 	public String addNewMovie(Model model) {
 		Movie m = new Movie();
 		model.addAttribute("newMovie", m);
-
-		List<MovieType> movieTypes = movieTypeRepo.findAll();
-		model.addAttribute("movieTypes", movieTypes);
-		
 		return "movie";
 	}
 
@@ -155,24 +143,21 @@ public class WebController {
 
 	// Edit delete update movie
 
-	@GetMapping("/editMovie/{id}")
-	public String showUpdateMovie(@PathVariable("id") long id, Model model) {
+	@GetMapping("/editMovie/{movieID}")
+	public String showUpdateMovie(@PathVariable("movieID") long id, Model model) {
 		Movie m = movieRepo.findById(id).orElse(null);
 		model.addAttribute("newMovie", m);
-		
-		List<MovieType> movieTypes = movieTypeRepo.findAll();
-		model.addAttribute("movieTypes", movieTypes);
 		return "movie";
 	}
 
-	@PostMapping("/updateMovie/{id}")
+	@PostMapping("/updateMovie/{movieID}")
 	public String reviseMovie(Movie m, Model model) {
 		movieRepo.save(m);
 		return viewAllMovies(model);
 	}
 
-	@GetMapping("/deleteMovie/{id}")
-	public String deleteMovieUser(@PathVariable("id") long id, Model model) {
+	@GetMapping("/deleteMovie/{movieID}")
+	public String deleteMovieUser(@PathVariable("movieID") long id, Model model) {
 		Movie m = movieRepo.findById(id).orElse(null);
 		movieRepo.delete(m);
 		return viewAllMovies(model);
@@ -187,7 +172,6 @@ public class WebController {
 		Rental r = new Rental();
 		Member mem = (Member) session.getAttribute("member");
 		r.setMember(mem);
-		System.out.println(mem);
 		model.addAttribute("newRental", r);
 		
 		List<Movie> movies = movieRepo.findAll();
@@ -203,13 +187,13 @@ public class WebController {
 		System.out.println(r.toString());
 		
 		}catch(Exception e) {
-			model.addAttribute("rentalFail", "Something went wrong, please contact us to resolve this issue!");
-//			Rental redo = new Rental();
-//			model.addAttribute("newRental", redo);
-//			
-//			List<Movie> movies = movieRepo.findAll();
-//			model.addAttribute("movies", movies);
-//			return "rental";
+			model.addAttribute("rentalFail", "You must be a member to rent a movie!");
+			Rental redo = new Rental();
+			model.addAttribute("newRental", redo);
+			
+			List<Movie> movies = movieRepo.findAll();
+			model.addAttribute("movies", movies);
+			return "rental";
 		}
 		model.addAttribute("rental", r);
 		return memberRentals(model, session);
@@ -243,8 +227,7 @@ public class WebController {
 		rentRepo.save(r);
 		return memberRentals(model, session);
 		}
-
-// END RENTAL =============================================================
+// END RENTAL
 	
 	@GetMapping( "/memberLogin")
 	public String memberLogin(Model model) {
@@ -328,75 +311,26 @@ public class WebController {
 		return viewAllPaymentTypes(model);
 	}
 
-	@GetMapping("/editPaymentType/{id}")
-	public String showUpdatePaymentType(@PathVariable("id") long id, Model model) {
+	@GetMapping("/editPaymentType/{paymentId}")
+	public String showUpdatePaymentType(@PathVariable("paymentId") long id, Model model) {
 		Payment p = payRepo.findById(id).orElse(null);
 		model.addAttribute("newPaymentType", p);
 		return "addPaymentType";
 	}
 
-	@PostMapping("/updatePaymentType/{id}")
+	@PostMapping("/updatePaymentType/{paymentId}")
 	public String revisePaymentType(Payment p, Model model) {
 		payRepo.save(p);
 		return viewAllPaymentTypes(model);
 	}
 
-	@GetMapping("/deletePaymentType/{id}")
-	public String deletePaymentType(@PathVariable("id") long id, Model model) {
+	@GetMapping("/deletePaymentType/{paymentId}")
+	public String deletePaymentType(@PathVariable("paymentId") long id, Model model) {
 		Payment p = payRepo.findById(id).orElse(null);
 		payRepo.delete(p);
 		return viewAllPaymentTypes(model);
 	}
 
-//================================================================
-// Movie Type
-//================================================================
-		
-		@GetMapping("/viewAllMovieTypes")
-		public String viewAllMovieTypes(Model model) {
-			if (movieTypeRepo.findAll().isEmpty()) {
-				return addNewMovieType(model);
-			}
-			model.addAttribute("moiveTypes", movieTypeRepo.findAll());
-			return viewAllMovie(model);
-		}
-
-
-		@GetMapping("/addMovieType")
-		public String addNewMovieType(Model model) {
-			MovieType mt = new MovieType();
-			model.addAttribute("newMovieType", mt);
-			return "MovieType";
-		}
-
-		@PostMapping("/addMovieType")
-		public String addNewMovieType(@ModelAttribute MovieType mt, Model model) {
-			movieTypeRepo.save(mt);
-			return addNewMovie(model);
-		}
-
-		@GetMapping("/editMovieType/{id}")
-		public String showUpdateMovieType(@PathVariable("id") long id, Model model) {
-			MovieType mt = movieTypeRepo.findById(id).orElse(null);
-			model.addAttribute("newMovieType", mt);
-			return "employeeHome";
-		}
-
-		@PostMapping("/updateMovieType/{id}")
-		public String reviseMovieType(MovieType mt, Model model) {
-			movieTypeRepo.save(mt);
-			return viewAllMovieTypes(model);
-		}
-
-		@GetMapping("/deleteMovieType/{id}")
-		public String deleteMovieType(@PathVariable("id") long id, Model model) {
-			MovieType mt = movieTypeRepo.findById(id).orElse(null);
-			movieTypeRepo.delete(mt);
-			return viewAllMovieTypes(model);
-		}
-
-// End MovieType =============================================================
-		
 	@GetMapping("/style.css")
 	public String stylesheet() {
 		return "style.css";

@@ -48,6 +48,7 @@
 <h1>Fill up the Member Registration Form</h1>
 <a href="home">Go Home</a>
 </div>
+
 <form th:object="${newMember}" 
 th:action= "@{/updateMember/{id}(id=${newMember.memberID})}" name = "myForm" onsubmit = "return validate();" method='POST'>
 
